@@ -7,6 +7,7 @@ import {
   Settings2,
   Menu,
   LayoutDashboard,
+  NotebookPenIcon,
 } from "lucide-react";
 import {
   Sidebar,
@@ -33,14 +34,9 @@ import { getFirstTwoNames } from "@/utils/getFirstTwoNames";
 
 const items = [
   {
-    title: "Dashboard",
+    title: "Dicas",
     url: "/",
-    icon: LayoutDashboard,
-  },
-  {
-    title: "Chat",
-    url: "/chat",
-    icon: MessageCircle,
+    icon: NotebookPenIcon,
   },
 ];
 

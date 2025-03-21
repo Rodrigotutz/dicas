@@ -7,15 +7,6 @@ import { columns } from "./columns";
 import { User } from "@/types/user";
 
 import { getUsers } from "@/utils/auth/getUsers";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 export default function Page() {
   const [data, setData] = useState<User[]>([]);
@@ -38,8 +29,8 @@ export default function Page() {
   }, []);
 
   return (
-    <div>
-      <h2 className="font-bold text-xl flex items-center gap-2 pb-5">
+    <div className="min-h-96">
+      <h2 className="font-bold text-xl flex items-center gap-2 pb-5 border-b">
         <UserCogIcon size={30} /> Usuarios
       </h2>
 

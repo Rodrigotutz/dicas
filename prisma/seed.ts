@@ -16,6 +16,8 @@ async function main() {
     },
   });
 
+  
+  /*
   const users = Array.from({ length: 30 }).map((_, i) => ({
     email: `user${i + 1}@mail.com`,
     name: `Usuário ${i + 1}`,
@@ -35,7 +37,6 @@ async function main() {
 
   const allUsers = await prisma.user.findMany({ select: { id: true } });
 
-  /*
   
     await prisma.room.createMany({
     data: Array.from({ length: 10 }).map((_, i) => ({
