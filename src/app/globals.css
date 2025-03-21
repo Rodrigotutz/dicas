@@ -1,8 +1,23 @@
 @import "tailwindcss";
 
-@plugin "tailwindcss-animate";
 
-@custom-variant dark (&:is(.dark *));
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(70, 70, 70);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(100, 99, 99) transparent;
+}
 
 :root {
   --card: oklch(1 0 0);

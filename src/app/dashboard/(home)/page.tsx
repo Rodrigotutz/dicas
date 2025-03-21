@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Editor } from "@tinymce/tinymce-react";
+import { useState, useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -9,22 +9,32 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PlusCircle } from "lucide-react";
 import Form from "next/form";
 
+const Editor = dynamic(
+  () => import("@tinymce/tinymce-react").then((mod) => mod.Editor),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-[300px] flex items-center justify-center text-gray-500 p-10">
+        Carregando editor...
+      </div>
+    ),
+  }
+);
+
 export default function Page() {
   const [solucao, setSolucao] = useState("");
+  const editorRef = useRef<any>(null);
 
   const handleEditorChange = (content: string) => {
     setSolucao(content);
   };
 
-  const handleSubmit = (formData: FormData) => {
-
-  };
+  const handleSubmit = (formData: FormData) => {};
 
   return (
     <div className="py-10 px-5 flex justify-between items-center">
@@ -36,8 +46,16 @@ export default function Page() {
           </Button>
         </DialogTrigger>
 
-        <DialogContent className="h-5/6 w-full max-w-6xl overflow-hidden">
+        <DialogContent
+          className="h-5/6 w-full max-w-6xl overflow-hidden"
+          style={{
+            scrollbarWidth: "thin",
+            scrollbarColor: "black transparent", 
+            overflowY: "auto",
+          }}
+        >
           <DialogTitle className="font-bold">Nova Dica</DialogTitle>
+
           <div className="max-h-[80vh] overflow-y-auto p-4 mt-3">
             <Form action={handleSubmit}>
               <div className="mb-3">
@@ -55,7 +73,7 @@ export default function Page() {
                 <Label className="mb-1" htmlFor="solucao">
                   Solução:
                 </Label>
-                <div className="max-h-[500px] overflow-y-auto border rounded">
+                <div className="max-h-[500px] overflow-y-auto border rounded p-2">
                   <Editor
                     apiKey="1xncjp6ftmlmfrylsguwag7884pouij37b0tl4mxg7svqjoa"
                     id="solucao"
@@ -63,7 +81,7 @@ export default function Page() {
                     init={{
                       height: 400,
                       menubar: true,
-                      plugins: ['lists', 'link'],
+                      plugins: ["lists", "link"],
                       toolbar:
                         "undo redo | bold italic | bullist numlist outdent indent | link",
                     }}
